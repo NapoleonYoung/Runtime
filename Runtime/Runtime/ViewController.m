@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "Car.h"
 #import <objc/runtime.h>
+#import <objc/message.h>
 
 #import "Car+Category.h"
 
@@ -38,6 +39,7 @@
     NSLog(@"我的车：%@", myLancrusier.name);
     
     unsigned int count;
+    //ivars使用完毕必须手动释放
     Ivar *ivars = class_copyIvarList([myLancrusier class], &count);
     for (int i = 0; i < count; i ++) {
         Ivar ivar = ivars[i];
@@ -48,6 +50,7 @@
             break;
         }
     }
+    free(ivars);
     NSLog(@"我的车：%@", myLancrusier.name);
 }
 
